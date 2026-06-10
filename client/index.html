@@ -113,15 +113,6 @@ word-wrap:break-word;
 line-height:1.5;
 }
 
-.time{
-font-size:11px;
-opacity:0.7;
-margin-left:8px;
-white-space:nowrap;
-display:inline-block;
-vertical-align:bottom;
-}
-
 .sent{
 align-self:flex-end;
 background:linear-gradient(135deg,#833ab4,#405de6);
@@ -188,6 +179,7 @@ font-size:14px;
 <h2>📚 RPSE RAJASTHAN</h2>
 
 <p>Password Enter Kare</p>
+
 <input
 type="password"
 id="password"
@@ -216,16 +208,15 @@ Access Denied
 
 <input
 id="message"
-placeholder="Apna swal type kre ..."
-autocomplete="off"
-autocorrect="off"
-spellcheck="false">
+placeholder="Apna swal type kre ...">
 
 <button
 class="askBtn"
 onclick="sendMessage()">
 Ask
 </button>
+
+</div>
 
 </div>
 
@@ -287,27 +278,17 @@ document.createElement("div");
 div.className =
 `msg ${type}`;
 
-const time =
-new Date().toLocaleTimeString('en-US',{
-hour:'numeric',
-minute:'2-digit',
-hour12:true
-});
+div.innerText = text;
 
-div.innerHTML = `
-<span>${text}</span>
-<span class="time">${time}</span>
-`;
+document.getElementById("chat")
+.appendChild(div);
 
-const chat = document.getElementById("chat");
+document.getElementById("chat")
+.scrollTop =
+document.getElementById("chat")
+.scrollHeight;
 
-chat.appendChild(div);
-
-chat.scrollTo({
-top: chat.scrollHeight,
-behavior: "smooth"
-});
-
+}
 
 function sendMessage(){
 
