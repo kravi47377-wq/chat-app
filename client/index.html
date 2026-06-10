@@ -89,25 +89,53 @@ font-weight:600;
 <body>
 
 <script>
+
 const pass = prompt("Password Enter Kare");
 
-if(pass !== "duggu123"){
-document.body.innerHTML = `
-<div style="
+if(pass !== "duggubuggu1525"){
+
+document.open();
+
+document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Access Denied</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+body{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 background:#0f172a;
 color:white;
-font-size:22px;
-font-family:sans-serif;
-">
-Access Denied
-</div>
-`;
-throw new Error("Wrong Password");
+font-size:32px;
+font-weight:600;
 }
+</style>
+
+</head>
+
+<body>
+Access Denied
+</body>
+</html>
+`);
+
+document.close();
+
+throw new Error("Access Denied");
+}
+
 </script>
 
 <div class="logo">
