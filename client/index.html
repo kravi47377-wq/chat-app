@@ -99,9 +99,9 @@ border-bottom:1px solid #1f2937;
 flex:1;
 overflow-y:auto;
 padding:15px;
-padding-bottom:90px;
 display:flex;
 flex-direction:column;
+justify-content:flex-end;
 gap:10px;
 }
 
@@ -133,11 +133,7 @@ display:flex;
 gap:10px;
 padding:10px;
 background:#111827;
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-z-index:999;
+flex-shrink:0;
 }
 
 #message{
@@ -184,7 +180,12 @@ font-size:14px;
 <h2>📚 RPSE RAJASTHAN</h2>
 
 <p>Password Enter Kare</p>
-
+<input
+id="message"
+placeholder="Apna swal type kre ..."
+autocomplete="off"
+autocorrect="off"
+spellcheck="false">
 <input
 type="password"
 id="password"
