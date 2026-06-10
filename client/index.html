@@ -117,8 +117,10 @@ line-height:1.5;
 .time{
 font-size:11px;
 opacity:0.7;
-text-align:right;
-margin-top:4px;
+margin-left:8px;
+white-space:nowrap;
+display:inline-block;
+vertical-align:bottom;
 }
 
 .sent{
@@ -289,14 +291,15 @@ div.className =
 `msg ${type}`;
 
 const time =
-new Date().toLocaleTimeString([],{
-hour:'2-digit',
-minute:'2-digit'
+new Date().toLocaleTimeString('en-US',{
+hour:'numeric',
+minute:'2-digit',
+hour12:true
 });
 
 div.innerHTML = `
-<div>${text}</div>
-<div class="time">${time}</div>
+<span>${text}</span>
+<span class="time">${time}</span>
 `;
 
 document.getElementById("chat")
