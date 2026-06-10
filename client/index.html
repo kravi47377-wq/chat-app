@@ -280,6 +280,15 @@ Math.random().toString(36).substring(2);
 
 function addMessage(text,type){
 
+const chat = document.getElementById("chat");
+
+chat.appendChild(div);
+
+chat.scrollTo({
+top: chat.scrollHeight,
+behavior: "smooth"
+});
+
 const div =
 document.createElement("div");
 
