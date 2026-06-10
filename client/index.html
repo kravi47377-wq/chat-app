@@ -228,6 +228,20 @@ Ask
 
 const PASSWORD = "duggubuggu1525";
 
+if(sessionStorage.getItem("loggedIn")==="yes"){
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("chatPage").style.display="flex";
+
+document.getElementById("chat").innerHTML="";
+
+});
+
+}
+
 function checkPassword(){
 
 const pass =
@@ -238,6 +252,10 @@ if(pass === PASSWORD){
 document.getElementById("loginPage").style.display="none";
 
 document.getElementById("chatPage").style.display="flex";
+
+sessionStorage.setItem("loggedIn","yes");
+
+document.getElementById("chat").innerHTML="";
 
 }else{
 
@@ -292,6 +310,7 @@ sender:myId
 });
 
 input.value="";
+input.focus();
 
 }
 
