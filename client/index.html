@@ -87,7 +87,18 @@ font-weight:bold;
 <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 
 <script>
-const socket = io("https://duggu.onrender.com");
+
+const socket = io("https://duggu.onrender.com",{
+transports:["websocket","polling"]
+});
+
+socket.on("connect",()=>{
+console.log("Connected:",socket.id);
+});
+
+socket.on("connect_error",(err)=>{
+console.log("Connection Error:",err.message);
+});
 
 function sendMessage(){
 
@@ -105,14 +116,16 @@ socket.on("receive_message",(msg)=>{
 const div=document.createElement("div");
 
 div.className="msg";
+
 div.innerText=msg;
 
 document.getElementById("chat").appendChild(div);
 
-document.getElementById("chat").scrollTop =
+document.getElementById("chat").scrollTop=
 document.getElementById("chat").scrollHeight;
 
 });
+
 </script>
 
 </body>
