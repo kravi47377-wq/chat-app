@@ -281,15 +281,6 @@ Math.random().toString(36).substring(2);
 
 function addMessage(text,type){
 
-const chat = document.getElementById("chat");
-
-chat.appendChild(div);
-
-chat.scrollTo({
-top: chat.scrollHeight,
-behavior: "smooth"
-});
-
 const div =
 document.createElement("div");
 
@@ -308,13 +299,13 @@ div.innerHTML = `
 <span class="time">${time}</span>
 `;
 
-document.getElementById("chat")
-.appendChild(div);
+const chat =
+document.getElementById("chat");
 
-document.getElementById("chat")
-.scrollTop =
-document.getElementById("chat")
-.scrollHeight;
+chat.appendChild(div);
+
+chat.scrollTop =
+chat.scrollHeight;
 
 }
 
