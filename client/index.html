@@ -143,6 +143,8 @@ gap:10px;
 padding:10px;
 background:#111827;
 flex-shrink:0;
+transition:transform .15s ease;
+will-change:transform;
 }
 
 #message{
@@ -213,7 +215,7 @@ Access Denied
 
 <div id="chat"></div>
 
-<div class="bottom">
+<div class="bottom" id="bottomBar"></div>
 
 <input
 id="message"
@@ -359,6 +361,49 @@ data.text,
 );
 
 });
+
+if(window.visualViewport){
+
+const bottomBar =
+document.getElementById("bottomBar");
+
+function updateViewport(){
+
+const viewport =
+window.visualViewport;
+
+const keyboardHeight =
+window.innerHeight -
+viewport.height -
+viewport.offsetTop;
+
+if(keyboardHeight > 120){
+
+bottomBar.style.transform =
+`translateY(-${keyboardHeight}px)`;
+
+}else{
+
+bottomBar.style.transform =
+"translateY(0)";
+
+}
+
+}
+
+visualViewport.addEventListener(
+"resize",
+updateViewport
+);
+
+visualViewport.addEventListener(
+"scroll",
+updateViewport
+);
+
+updateViewport();
+
+}
 
 </script>
 
