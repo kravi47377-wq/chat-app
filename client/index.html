@@ -241,6 +241,61 @@ overflow:hidden;
 z-index:9999;
 }
 
+#welcomeText{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:42px;
+font-weight:700;
+color:white;
+text-align:center;
+text-shadow:0 0 30px #ff69b4;
+z-index:10001;
+}
+
+#teamLoginModal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+z-index:10000;
+justify-content:center;
+align-items:center;
+}
+
+.team-box{
+width:90%;
+max-width:350px;
+background:#111827;
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+.team-box h2{
+color:white;
+margin-bottom:10px;
+}
+
+.team-box input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+border-radius:12px;
+background:#1f2937;
+color:white;
+margin:15px 0;
+}
+
+.teamError{
+display:none;
+color:#ef4444;
+font-size:13px;
+}
+
 .rose{
 position:absolute;
 top:-50px;
@@ -379,6 +434,37 @@ Ask
 
 <div id="roseContainer"></div>
 
+<div id="welcomeText">
+🥰 Congratulations Duggu 🥰
+</div>
+
+<div id="teamLoginModal">
+
+<div class="team-box">
+
+<h2>🥰 Team Access 🥰</h2>
+
+<input
+type="password"
+id="teamPassword"
+placeholder="Password">
+
+<button
+class="askBtn"
+onclick="checkTeamPassword()">
+Enter
+</button>
+
+<div
+id="teamError"
+class="teamError">
+Wrong Password
+</div>
+
+</div>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.8.1/dist/socket.io.min.js"></script>
 
 <script>
@@ -400,6 +486,17 @@ document.getElementById("chat").innerHTML="";
 });
 
 }
+document
+.getElementById("teamPassword")
+.addEventListener("keypress",(e)=>{
+
+if(e.key==="Enter"){
+
+checkTeamPassword();
+
+}
+
+});
 
 function checkPassword(){
 
@@ -593,28 +690,34 @@ location.reload();
 
 function roseRain(){
 
-for(let i=0;i<40;i++){
+const items=[
+"🥰","😍","😘",
+"💕","❤️",
+"✨","💖","🎊"
+];
 
-const rose =
-document.createElement("div");
+for(let i=0;i<25;i++){
 
-rose.className="rose";
+const item=document.createElement("div");
 
-rose.innerHTML="🌹";
+item.className="rose";
 
-rose.style.left =
-Math.random()*100 + "vw";
+item.innerHTML=
+items[Math.floor(Math.random()*items.length)];
 
-rose.style.animationDelay =
-Math.random()*2 + "s";
+item.style.left=
+Math.random()*100+"vw";
+
+item.style.animationDuration=
+(4+Math.random()*4)+"s";
 
 document
 .getElementById("roseContainer")
-.appendChild(rose);
+.appendChild(item);
 
 setTimeout(()=>{
-rose.remove();
-},6000);
+item.remove();
+},10000);
 
 }
 
@@ -622,25 +725,53 @@ rose.remove();
 
 function openTeam(){
 
+document
+.getElementById("teamLoginModal")
+.style.display="flex";
+
+}
+
+async function checkTeamPassword(){
+
 const pass =
-prompt("Team Password Enter Kare");
+document.getElementById("teamPassword").value;
 
 if(pass !== "duggubuggu"){
 
-alert("Wrong Password");
+document
+.getElementById("teamError")
+.style.display="block";
 
 return;
 
 }
 
-alert("🥰 Congratulations Duggu 🥰");
+document
+.getElementById("teamLoginModal")
+.style.display="none";
+
+document
+.getElementById("welcomeText")
+.style.display="block";
 
 roseRain();
 
-setTimeout(async ()=>{
+const petalsInterval =
+setInterval(()=>{
+roseRain();
+},3000);
+
+setTimeout(()=>{
+document
+.getElementById("welcomeText")
+.style.display="none";
+},3000);
+
+setTimeout(()=>{
+clearInterval(petalsInterval);
+},15000);
 
 document.getElementById("chatPage").style.display="none";
-
 document.getElementById("teamPage").style.display="flex";
 
 document.getElementById("teamChat").innerHTML="";
@@ -658,12 +789,10 @@ messages.forEach((msg)=>{
 const div =
 document.createElement("div");
 
-if(msg.sender === currentUser){
-div.className = "msg sent";
-}
-else{
-div.className = "msg received";
-}
+div.className =
+msg.sender===currentUser
+? "msg sent"
+: "msg received";
 
 const time =
 new Date().toLocaleTimeString('en-US',{
@@ -672,7 +801,7 @@ minute:'2-digit',
 hour12:true
 });
 
-div.innerHTML = `
+div.innerHTML=`
 <span>${msg.text}</span>
 <span class="time">${time}</span>
 `;
@@ -682,8 +811,6 @@ document
 .appendChild(div);
 
 });
-
-},2500);
 
 }
 
