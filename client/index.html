@@ -92,6 +92,9 @@ overflow:hidden;
 }
 
 .logo{
+position:sticky;
+top:0;
+z-index:100;
 background:#111827;
 padding:15px;
 display:flex;
@@ -142,6 +145,7 @@ padding:15px;
 display:flex;
 flex-direction:column;
 gap:10px;
+min-height:0;
 }
 
 #chat::before{
@@ -182,14 +186,14 @@ vertical-align:bottom;
 }
 
 .bottom{
+position:sticky;
+bottom:0;
+z-index:100;
 display:flex;
 gap:10px;
 padding:10px;
 background:#111827;
 flex-shrink:0;
-position:sticky;
-bottom:0;
-z-index:100;
 }
 
 #message{
@@ -237,6 +241,7 @@ padding:15px;
 display:flex;
 flex-direction:column;
 gap:10px;
+min-height:0;
 }
 
 #teamChat::before{
