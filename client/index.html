@@ -300,28 +300,46 @@ font-size:13px;
 position:absolute;
 top:-50px;
 font-size:28px;
-animation:fall 4s linear forwards;
+animation:floatFall linear forwards;
 }
 
-@keyframes fall{
+@keyframes floatFall{
+
 0%{
-transform:translateY(-50px) rotate(0deg);
+transform:
+translateX(0px)
+translateY(-50px)
+rotate(0deg);
 opacity:1;
 }
+
+25%{
+transform:
+translateX(-40px)
+translateY(25vh)
+rotate(90deg);
+}
+
+50%{
+transform:
+translateX(30px)
+translateY(50vh)
+rotate(180deg);
+}
+
+75%{
+transform:
+translateX(-25px)
+translateY(75vh)
+rotate(270deg);
+}
+
 100%{
-transform:translateY(110vh) rotate(360deg);
+transform:
+translateX(40px)
+translateY(110vh)
+rotate(360deg);
 opacity:0;
-}
-}
-
-@media(max-width:768px){
-
-.msg{
-max-width:88%;
-}
-
-.logo{
-font-size:14px;
 }
 
 }
@@ -707,6 +725,11 @@ items[Math.floor(Math.random()*items.length)];
 
 item.style.left=
 Math.random()*100+"vw";
+item.style.fontSize =
+(18 + Math.random()*20) + "px";
+
+item.style.animationDuration =
+(5 + Math.random()*6) + "s";
 
 item.style.animationDuration=
 (4+Math.random()*4)+"s";
