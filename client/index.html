@@ -237,9 +237,11 @@ Ask
 
 <script>
 
-const PASSWORD = "duggubuggu1525";
+let currentUser = "";
 
-if(sessionStorage.getItem("loggedIn")==="yes"){
+if(sessionStorage.getItem("loggedIn")){
+
+currentUser = sessionStorage.getItem("loggedIn");
 
 document.addEventListener("DOMContentLoaded",()=>{
 
@@ -258,17 +260,35 @@ function checkPassword(){
 const pass =
 document.getElementById("password").value;
 
-if(pass === PASSWORD){
+if(pass === "duggu1525"){
+
+currentUser = "admin";
 
 document.getElementById("loginPage").style.display="none";
 
 document.getElementById("chatPage").style.display="flex";
 
-sessionStorage.setItem("loggedIn","yes");
+sessionStorage.setItem("loggedIn","admin");
 
 document.getElementById("chat").innerHTML="";
 
-}else{
+}
+
+else if(pass === "buggu1525"){
+
+currentUser = "duggu";
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("chatPage").style.display="flex";
+
+sessionStorage.setItem("loggedIn","duggu");
+
+document.getElementById("chat").innerHTML="";
+
+}
+
+else{
 
 document.getElementById("error").style.display="block";
 
