@@ -516,6 +516,28 @@ data.text,
 
 });
 
+socket.on(
+"receive_team_message",
+(data)=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+data.sender===currentUser
+? "msg sent"
+: "msg received";
+
+div.innerHTML = `
+<span>${data.text}</span>
+`;
+
+document
+.getElementById("teamChat")
+.appendChild(div);
+
+});
+
 const menuBtn =
 document.getElementById("menuBtn");
 
@@ -622,17 +644,14 @@ input.value.trim();
 
 if(!msg) return;
 
-const div =
-document.createElement("div");
-
-div.className="msg sent";
-
-div.innerHTML=msg;
-
-document.getElementById("teamChat")
-.appendChild(div);
+socket.emit("send_team_message",{
+text:msg,
+sender:currentUser
+});
 
 input.value="";
+
+}
 
 }
 
