@@ -541,8 +541,16 @@ else{
 div.className = "msg received";
 }
 
+const time =
+new Date().toLocaleTimeString('en-US',{
+hour:'numeric',
+minute:'2-digit',
+hour12:true
+});
+
 div.innerHTML = `
 <span>${data.text}</span>
+<span class="time">${time}</span>
 `;
 
 document
@@ -657,8 +665,17 @@ else{
 div.className = "msg received";
 }
 
-div.innerHTML =
-`<span>${msg.text}</span>`;
+const time =
+new Date().toLocaleTimeString('en-US',{
+hour:'numeric',
+minute:'2-digit',
+hour12:true
+});
+
+div.innerHTML = `
+<span>${msg.text}</span>
+<span class="time">${time}</span>
+`;
 
 document
 .getElementById("teamChat")
@@ -693,8 +710,17 @@ document.createElement("div");
 
 div.className="msg sent";
 
-div.innerHTML=
-`<span>${msg}</span>`;
+const time =
+new Date().toLocaleTimeString('en-US',{
+hour:'numeric',
+minute:'2-digit',
+hour12:true
+});
+
+div.innerHTML = `
+<span>${msg}</span>
+<span class="time">${time}</span>
+`;
 
 document
 .getElementById("teamChat")
@@ -715,6 +741,18 @@ document
 .scrollHeight;
 
 }
+
+document
+.getElementById("teamMessage")
+.addEventListener("keypress",(e)=>{
+
+if(e.key==="Enter"){
+
+sendTeamMessage();
+
+}
+
+});
 
 </script>
 
