@@ -78,6 +78,18 @@ io.emit("receive_team_message", data);
 
 });
 
+socket.on("typing",(data)=>{
+
+socket.broadcast.emit("typing",data);
+
+});
+
+socket.on("stop_typing",(data)=>{
+
+socket.broadcast.emit("stop_typing",data);
+
+});
+
 socket.on("disconnect", () => {
 console.log("User Disconnected");
 });
