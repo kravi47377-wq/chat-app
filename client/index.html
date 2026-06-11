@@ -298,46 +298,24 @@ font-size:13px;
 
 .rose{
 position:absolute;
-top:-50px;
 font-size:28px;
-animation:floatFall linear forwards;
+animation:floatRandom linear forwards;
 }
 
-@keyframes floatFall{
+@keyframes floatRandom{
 
 0%{
-transform:
-translateX(0px)
-translateY(-50px)
-rotate(0deg);
+transform:translate(0,0) rotate(0deg);
+opacity:0;
+}
+
+10%{
 opacity:1;
-}
-
-25%{
-transform:
-translateX(-40px)
-translateY(25vh)
-rotate(90deg);
-}
-
-50%{
-transform:
-translateX(30px)
-translateY(50vh)
-rotate(180deg);
-}
-
-75%{
-transform:
-translateX(-25px)
-translateY(75vh)
-rotate(270deg);
 }
 
 100%{
 transform:
-translateX(40px)
-translateY(110vh)
+translate(var(--moveX),var(--moveY))
 rotate(360deg);
 opacity:0;
 }
@@ -511,6 +489,18 @@ document
 if(e.key==="Enter"){
 
 checkTeamPassword();
+
+}
+
+});
+
+document
+.getElementById("password")
+.addEventListener("keypress",(e)=>{
+
+if(e.key==="Enter"){
+
+checkPassword();
 
 }
 
@@ -705,34 +695,44 @@ sessionStorage.clear();
 location.reload();
 
 }
-
 function roseRain(){
 
 const items=[
 "🥰","😍","😘",
 "💕","❤️",
-"✨","💖","🎊"
+"✨","💖","🥳"
 ];
 
 for(let i=0;i<25;i++){
 
-const item=document.createElement("div");
+const item =
+document.createElement("div");
 
 item.className="rose";
 
 item.innerHTML=
 items[Math.floor(Math.random()*items.length)];
 
-item.style.left=
-Math.random()*100+"vw";
+item.style.left =
+Math.random()*100 + "vw";
+
+item.style.top =
+Math.random()*100 + "vh";
+
 item.style.fontSize =
 (18 + Math.random()*20) + "px";
 
 item.style.animationDuration =
-(5 + Math.random()*6) + "s";
+(6 + Math.random()*8) + "s";
 
-item.style.animationDuration=
-(4+Math.random()*4)+"s";
+const moveX =
+Math.floor(Math.random()*300)-150;
+
+const moveY =
+Math.floor(Math.random()*300)-150;
+
+item.style.setProperty('--moveX', moveX+'px');
+item.style.setProperty('--moveY', moveY+'px');
 
 document
 .getElementById("roseContainer")
@@ -740,7 +740,7 @@ document
 
 setTimeout(()=>{
 item.remove();
-},10000);
+},14000);
 
 }
 
