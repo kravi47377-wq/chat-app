@@ -636,6 +636,10 @@ socket.on(
 "receive_team_message",
 (data)=>{
 
+if(data.sender === currentUser){
+return;
+
+}
 const div =
 document.createElement("div");
 
