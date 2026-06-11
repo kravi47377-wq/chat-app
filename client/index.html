@@ -227,6 +227,7 @@ padding:15px;
 display:flex;
 flex-direction:column;
 gap:10px;
+justify-content:flex-end;
 }
 
 #roseContainer{
@@ -533,10 +534,12 @@ socket.on(
 const div =
 document.createElement("div");
 
-div.className =
-data.sender===currentUser
-? "msg sent"
-: "msg received";
+if(data.sender === currentUser){
+div.className = "msg sent";
+}
+else{
+div.className = "msg received";
+}
 
 div.innerHTML = `
 <span>${data.text}</span>
@@ -647,10 +650,12 @@ messages.forEach((msg)=>{
 const div =
 document.createElement("div");
 
-div.className =
-msg.sender===currentUser
-? "msg sent"
-: "msg received";
+if(msg.sender === currentUser){
+div.className = "msg sent";
+}
+else{
+div.className = "msg received";
+}
 
 div.innerHTML =
 `<span>${msg.text}</span>`;
