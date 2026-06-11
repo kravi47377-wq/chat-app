@@ -192,6 +192,16 @@ background:#1f2937;
 color:white;
 }
 
+#teamMessage{
+flex:1;
+padding:14px;
+border:none;
+outline:none;
+border-radius:25px;
+background:#1f2937;
+color:white;
+}
+
 .askBtn{
 padding:14px 18px;
 border:none;
@@ -673,12 +683,31 @@ input.value.trim();
 
 if(!msg) return;
 
+const div =
+document.createElement("div");
+
+div.className="msg sent";
+
+div.innerHTML=
+`<span>${msg}</span>`;
+
+document
+.getElementById("teamChat")
+.appendChild(div);
+
 socket.emit("send_team_message",{
 text:msg,
 sender:currentUser
 });
 
 input.value="";
+
+document
+.getElementById("teamChat")
+.scrollTop=
+document
+.getElementById("teamChat")
+.scrollHeight;
 
 }
 
