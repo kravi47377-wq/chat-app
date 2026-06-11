@@ -616,11 +616,40 @@ alert("🥰 Congratulations Duggu 🥰");
 
 roseRain();
 
-setTimeout(()=>{
+setTimeout(async ()=>{
 
 document.getElementById("chatPage").style.display="none";
 
 document.getElementById("teamPage").style.display="flex";
+
+document.getElementById("teamChat").innerHTML="";
+
+const res =
+await fetch(
+"https://duggu.onrender.com/team-messages"
+);
+
+const messages =
+await res.json();
+
+messages.forEach((msg)=>{
+
+const div =
+document.createElement("div");
+
+div.className =
+msg.sender===currentUser
+? "msg sent"
+: "msg received";
+
+div.innerHTML =
+`<span>${msg.text}</span>`;
+
+document
+.getElementById("teamChat")
+.appendChild(div);
+
+});
 
 },2500);
 
